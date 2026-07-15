@@ -128,37 +128,6 @@ autocomplete/hover database.
 
 <img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="Building" src="assets/banner_building.png" height="56"/>
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/neroxservice/nxcode.git
-   ```
-2. `cd` into the project directory:
-   ```bash
-   cd nxcode
-   ```
-3. Install dependencies (also rebuilds `node-pty` against Electron's ABI):
-   ```bash
-   pnpm install
-   ```
-4. Run in development mode (Vite + Electron with hot reload):
-   ```bash
-   pnpm dev
-   ```
-5. Build the Windows installer:
-   ```bash
-   pnpm dist:win
-   ```
-
-The installer (NSIS) and a portable `.exe` are output to `release/`.
-
-> If `node-pty` fails to rebuild on Windows with an `MSB8040` error, install
-> the **Spectre-mitigated libraries** for your MSVC toolset via the Visual
-> Studio Installer (Individual Components → search "Spectre"), then run
-> `pnpm run rebuild`.
-
-<img alt="separator" src="assets/separator.png" width="100%"/>
 
 <img alt="License" src="assets/banner_license.png" height="56"/>
 
