@@ -1,6 +1,6 @@
 <div align="center">
 
-![nxCode Banner](.github/assets/banner_title.png)
+![nxCode Banner](assets/banner_title.png)
 
 [![Platform](https://img.shields.io/badge/platform-Windows-0d0d1a?style=for-the-badge&logo=windows11&logoColor=00e5ff)](#-building)
 [![Electron](https://img.shields.io/badge/Electron-31-0d0d1a?style=for-the-badge&logo=electron&logoColor=ff2d95)](#-tech-stack)
@@ -9,9 +9,9 @@
 
 </div>
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="About" src=".github/assets/banner_about.png" height="56"/>
+<img alt="About" src="assets/banner_about.png" height="56"/>
 
 **nxCode** is a desktop code editor with an anime/neon look, built on the same
 editor core as VS Code itself ([Monaco](https://microsoft.github.io/monaco-editor/)).
@@ -31,12 +31,12 @@ installer — all in one lightweight Electron app.
 > replacement for a full language server.
 >
 > ⚠️ **Windows-first.** The integrated terminal (`node-pty`), the installer,
-> and the auto-updater are all built and tested for Windows. It *may* run
+> and the auto-updater are all built and tested for Windows. It _may_ run
 > elsewhere via `pnpm dev`, but that's not the primary target.
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="Features" src=".github/assets/banner_features.png" height="56"/>
+<img alt="Features" src="assets/banner_features.png" height="56"/>
 
 - 🪟 **Split-view editing** — drag a tab to the right edge to open a second
   pane, exactly like VS Code. Both halves share the same live Monaco model,
@@ -74,9 +74,9 @@ installer — all in one lightweight Electron app.
   Terminal/Help, with working Undo/Redo, multi-cursor, comment toggling,
   go-to-line, and more.
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="Tech Stack" src=".github/assets/banner_techstack.png" height="56"/>
+<img alt="Tech Stack" src="assets/banner_techstack.png" height="56"/>
 
 <div align="center">
 
@@ -90,18 +90,18 @@ installer — all in one lightweight Electron app.
 
 </div>
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="Media" src=".github/assets/banner_media.png" height="56"/><br/>
+<img alt="Media" src="assets/banner_media.png" height="56"/><br/>
 
-<img alt="Split view" src=".github/assets/screenshot_splitview.png" width="720"/><br/>
+<img alt="Split view" src="assets/screenshot_splitview.png" width="720"/><br/>
 Split-view editing with live-synced Monaco models<br/><br/>
-<img alt="Menu bar and explorer" src=".github/assets/screenshot_menu.png" width="720"/><br/>
+<img alt="Menu bar and explorer" src="assets/screenshot_menu.png" width="720"/><br/>
 The full VS-Code-style menu bar, explorer, and bracket-pair colorization in action
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="FAQ" src=".github/assets/banner_faq.png" height="56"/>
+<img alt="FAQ" src="assets/banner_faq.png" height="56"/>
 
 ### Is this a VS Code extension?
 
@@ -126,9 +126,9 @@ since that's what it was built for. Other Lua frameworks will still get
 syntax highlighting and the generic bracket checker, just not the
 autocomplete/hover database.
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="Building" src=".github/assets/banner_building.png" height="56"/>
+<img alt="Building" src="assets/banner_building.png" height="56"/>
 
 1. Clone the repository:
    ```bash
@@ -158,9 +158,9 @@ The installer (NSIS) and a portable `.exe` are output to `release/`.
 > Studio Installer (Individual Components → search "Spectre"), then run
 > `pnpm run rebuild`.
 
-<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+<img alt="separator" src="assets/separator.png" width="100%"/>
 
-<img alt="License" src=".github/assets/banner_license.png" height="56"/>
+<img alt="License" src="assets/banner_license.png" height="56"/>
 
 This project is licensed under the MIT license. See [LICENSE](LICENSE) for
 more details.
