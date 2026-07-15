@@ -1,146 +1,172 @@
-# nxCode
+<div align="center">
 
-Ein VS-Code-artiger Desktop-Code-Editor im Anime/Neon-Pink-&-Cyan-Look, gebaut mit
-Electron + React + TypeScript + Vite + Monaco Editor (der Editor, der auch VS Code
-selbst antreibt).
+![nxCode Banner](.github/assets/banner_title.png)
 
-## Features
+[![Platform](https://img.shields.io/badge/platform-Windows-0d0d1a?style=for-the-badge&logo=windows11&logoColor=00e5ff)](#-building)
+[![Electron](https://img.shields.io/badge/Electron-31-0d0d1a?style=for-the-badge&logo=electron&logoColor=ff2d95)](#-tech-stack)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0d0d1a?style=for-the-badge&logo=opensourceinitiative&logoColor=b967ff)](LICENSE)
+[![Made with Monaco](https://img.shields.io/badge/editor-Monaco-0d0d1a?style=for-the-badge&logo=visualstudiocode&logoColor=00e5ff)](#-tech-stack)
 
-- **Alles persistent**: Theme, Schriftgröße, Format-on-Save, Minimap, Sidebar-Sichtbarkeit, Terminal-Höhe – UND der komplette Workspace (zuletzt geöffneter Ordner, offene Tabs je Gruppe, aufgeklappte Ordner, Split-Zustand) wird automatisch gespeichert und beim nächsten Start wiederhergestellt. Liegt als JSON in Electrons `userData`-Ordner
-- **FiveM/Lua-Funktions-Hervorhebung**: GTA5-Natives, CFX-Funktionen (`TriggerEvent`, `RegisterNetEvent`, ...) und ESX-API (`ESX.*`, `xPlayer.*`) werden in einer eigenen Akzentfarbe hervorgehoben – Monacos eingebauter Lua-Tokenizer kennt diese sonst nicht und stellt sie wie normale Variablen dar
-- **Ordner schließen**: über Datei-Menü, Explorer-Header-Icon oder Befehlspalette – schließt Ordner, alle Tabs und Split-Gruppen sauber (inkl. Aufräumen der Monaco-Modelle)
-- **Theme-Varianten**: 3 Akzentfarben-Presets (Neon Pink/Cyan, Cyber-Lila, Toxic-Grün), live umschaltbar über Ansicht-Menü – wirkt sich sowohl auf die UI-Farben als auch auf die Editor-Syntax-Highlighting-Farben aus
-- **Über nxCode & Tastenkürzel** als richtiges Modal (Hilfe-Menü): Branding mit Versionen (App/Electron/Chromium/Node), Tech-Stack-Badges, plus ein durchsuchbares Tastenkürzel-Cheatsheet
-- **Branded Splash-Screen** beim Start statt leerem Fenster, bis React/Monaco geladen sind
-- **VS-Code-artige Menüleiste**: Datei/Bearbeiten/Auswahl/Ansicht/Gehe-zu/Terminal/Hilfe mit Icons, echten Tastenkürzeln und funktionierenden Befehlen (Undo/Redo, Ausschneiden/Kopieren/Einfügen, Kommentar umschalten, Mehrfach-Cursor, Zeilen verschieben, Gehe-zu-Zeile, ...)
-- **Split-View**: Editor teilen (Ctrl+\, Button in der Tab-Leiste, oder **einen Tab/eine Explorer-Datei an den rechten Rand ziehen** – wie in VS Code) zeigt zwei Dateien nebeneinander, jede mit eigener Tab-Leiste. Beide Hälften nutzen ein zentral verwaltetes Monaco-Modell pro Datei – dieselbe Datei in beiden Hälften bleibt dadurch live synchron (inkl. Undo-Verlauf), jeder Tab merkt sich außerdem Cursor-Position/Scroll-Stand einzeln
-- **Datei-Explorer** mit Ordner öffnen, einzelne Datei öffnen, neue Datei/Ordner anlegen (Toolbar-Buttons oder Rechtsklick), umbenennen, **verschieben per Drag & Drop innerhalb des Baums**, löschen – Umbenennen/Verschieben hält offene Tabs & aufgeklappte Unterordner in allen Editor-Gruppen korrekt synchron
-- **Drag & Drop von außen**: Ordner oder Datei direkt aus dem Windows-Explorer ins Fenster ziehen zum Öffnen
-- **Format-on-Save**: beim Speichern wird automatisch formatiert – Prettier für TS/TSX/JS/JSX/JSON/CSS/SCSS/LESS/HTML/Markdown/YAML, ein eigener Lua-Reindent-Formatter für `.lua` (Prettier hat keinen offiziellen Lua-Support). Ein-/ausschaltbar über die Befehlspalette ("Format-on-Save")
-- **Erweiterte Syntax-Prüfung**: TS/JS/JSON/CSS/HTML nutzen Monacos eingebauten Sprachdienst; für **Lua** gibt es zusätzlich einen eigenen Checker, der fehlende/vertauschte `end`/`until` zu `function`/`if`/`for`/`while`/`repeat` sowie unbalancierte Klammern erkennt; für alle anderen Sprachen (Python, PHP, Go, Rust, C/C++/C#/Java, ...) läuft ein genereller Klammer-Balance-Check mit
-- **Auto-Close-Tag & Auto-Rename-Tag** für HTML/JSX/TSX/XML: `<div>` tippen ergänzt automatisch `</div>`; den Tag-Namen nachträglich ändern aktualisiert automatisch auch das Gegenstück
-- **Probleme-Panel** (wie VS Codes „Problems"-Tab): listet alle Fehler/Warnungen mit Datei, Zeile, Spalte und Meldung auf, Klick springt direkt zur Stelle; Zähler in der Statusleiste (`Ctrl+Shift+M`); Quick-Fix-Glühbirne (Ctrl+.) für TS/JS-Vorschläge
-- **FiveM/Lua-IntelliSense**: Autocomplete + Hover-Doku für ~6.700 echte GTA5-Natives (aus der öffentlichen `alloc8or/gta5-nativedb-data`-Datenbank) plus handkuratierte CFX-Framework- (Events, Threads, Ressourcen, Commands) und ESX-Legacy-Funktionen (`ESX.*`, `xPlayer.*`)
-- **React/JSX-IntelliSense**: echte `@types/react` + `@types/react-dom` Definitionen vorab geladen – Autocomplete/Hover für Hooks, JSX-Props, Events etc. auch ohne eigenes `node_modules` im geöffneten Ordner
-- **Integriertes Terminal**: echte `cmd.exe`-Session (xterm.js + node-pty)
-- **Tabs** mit Dirty-Indikator (ungespeicherte Änderungen)
-- **Befehlspalette** (`Ctrl+Shift+P`) mit Fuzzy-Suche
-- **Farbige Klammer-Ebenen** (Bracket Pair Colorization) im `nxNeon`-Theme – 6 unterscheidbare Neon-Farben inkl. aktivem Klammer-Paar-Highlight und vertikalen Guide-Linien
-- **Minimap**, Klammer-Matching, Multi-Cursor, Find & Replace (`Ctrl+F` / `Ctrl+H`) – alles nativ von Monaco
-- **Speichern / Speichern unter**, „Untitled"-Dateien wie in VS Code
-- Eigene, frameless Titlebar im neon-anime Stil, Statusleiste mit Cursor-Position & Sprache
+</div>
 
-### Grenzen der IntelliSense (wichtig zu wissen)
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
 
-Sowohl das FiveM/Lua- als auch das React/TS-IntelliSense sind **statisches,
-projekt-unabhängiges Autocomplete** – kein echter Language-Server-Prozess pro
-Projekt (das wäre wie VS Codes `tsserver` bzw. eine Lua-Language-Server-
-Instanz, die eigene `node_modules`/`tsconfig.json` bzw. lokale Lua-Module
-mitliest). Es kennt also:
-- ✅ Alle GTA5-Natives, CFX-Funktionen, ESX-Legacy-API, React/JSX-Grundlagen
-- ❌ Keine eigenen lokalen Funktionen/Variablen aus anderen Dateien deines Projekts
-- ❌ Keine Typen aus dem tatsächlichen `node_modules`-Ordner deines geöffneten Projekts
+<img alt="About" src=".github/assets/banner_about.png" height="56"/>
 
-Für den Alltag (Natives-Signaturen nachschlagen, ESX-Funktionen finden, React-
-Hooks-Autocomplete) ist das trotzdem ein sehr praktisches Sprungbrett.
+**nxCode** is a desktop code editor with an anime/neon look, built on the same
+editor core as VS Code itself ([Monaco](https://microsoft.github.io/monaco-editor/)).
+It's tailored for **FiveM/Lua scripting** and general **web development**,
+wrapped in a fully custom, neon pink/cyan (or Cyber-Purple, or Toxic-Green)
+UI shell.
 
-Das **Probleme-Panel** zeigt echte semantische Fehler/Warnungen für
-TypeScript/JavaScript/JSON/CSS/HTML (Monacos eingebauter Sprach-Checker) plus
-Klammer-/Block-Fehler für Lua und generische Klammer-Fehler für alle anderen
-Sprachen (eigene, einfache Checker – kein vollständiger Parser, erkennt aber
-zuverlässig vergessene/vertauschte Klammern und `end`/`until`).
+Split-view editing, a real integrated terminal, format-on-save, a full
+FiveM/ESX natives database with autocomplete, and a self-updating Windows
+installer — all in one lightweight Electron app.
 
-## Tastenkürzel
+> ⚠️ **FiveM/React IntelliSense is static, not a language server.**<br/>
+> Autocomplete for GTA5 natives, CFX/ESX functions, and React/JSX hooks works
+> out of the box — but nxCode doesn't read your project's own
+> `node_modules`/`tsconfig.json`, so it won't know about your own local
+> functions across files. Great for looking up native signatures, not a
+> replacement for a full language server.
+>
+> ⚠️ **Windows-first.** The integrated terminal (`node-pty`), the installer,
+> and the auto-updater are all built and tested for Windows. It *may* run
+> elsewhere via `pnpm dev`, but that's not the primary target.
 
-| Aktion                  | Shortcut           |
-|--------------------------|--------------------|
-| Ordner öffnen            | `Ctrl+O`           |
-| Datei öffnen             | `Ctrl+Shift+O`     |
-| Neue Datei               | `Ctrl+N`           |
-| Speichern                | `Ctrl+S`           |
-| Speichern unter          | `Ctrl+Shift+S`     |
-| Tab schließen            | `Ctrl+W`           |
-| Editor teilen            | `Ctrl+\`           |
-| Explorer ein/ausblenden  | `Ctrl+B`           |
-| Terminal ein/ausblenden  | `` Ctrl+` ``       |
-| Probleme ein/ausblenden  | `Ctrl+Shift+M`     |
-| Befehlspalette           | `Ctrl+Shift+P`     |
-| Suchen / Ersetzen        | `Ctrl+F` / `Ctrl+H`|
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
 
-## Voraussetzungen
+<img alt="Features" src=".github/assets/banner_features.png" height="56"/>
 
-- Node.js 20 LTS oder neuer
-- pnpm (`npm i -g pnpm`)
-- Auf Windows: Build-Tools für native Module (werden meist automatisch über
-  `node-gyp` nachinstalliert; falls nicht, `npm i -g windows-build-tools` bzw.
-  die "Desktop development with C++" Workload in Visual Studio Build Tools)
+- 🪟 **Split-view editing** — drag a tab to the right edge to open a second
+  pane, exactly like VS Code. Both halves share the same live Monaco model,
+  so edits sync instantly and undo history is shared too.
+- 🧠 **FiveM/Lua IntelliSense** — autocomplete + hover docs for ~6,700 real
+  GTA5 natives, plus hand-curated CFX (`TriggerEvent`, `RegisterNetEvent`, …)
+  and ESX Legacy (`ESX.*`, `xPlayer.*`) functions. Known API calls even get
+  their own accent color, since Monaco's stock Lua tokenizer doesn't know
+  them.
+- 🎨 **React/JSX IntelliSense** — real `@types/react`/`@types/react-dom`
+  preloaded, so hooks, props, and events autocomplete even without a local
+  `node_modules`.
+- 💅 **Format-on-save** — Prettier for TS/TSX/JS/JSX/JSON/CSS/SCSS/LESS/HTML/
+  Markdown/YAML, plus a custom re-indenting formatter for `.lua` (Prettier
+  has no official Lua support).
+- 🩺 **Problems panel** — real diagnostics for TS/JS/JSON/CSS/HTML via
+  Monaco's language services; for Lua, a custom checker catches
+  missing/mismatched `end`/`until`/brackets. Generic bracket checking for
+  everything else (Python, PHP, Go, Rust, C/C++/C#, Java, …).
+- 🖥️ **Integrated terminal** — a real `cmd.exe` session via `xterm.js` +
+  `node-pty`.
+- 🗂️ **Full file management** — open/create/rename/delete/move files and
+  folders (drag & drop in the tree, or drag in from Windows Explorer),
+  multi-tab editing with dirty indicators.
+- 🌍 **Multi-language UI** — German, English, French, and Turkish, switchable
+  live from Settings.
+- 🎛️ **Settings that stick** — theme, font size, format-on-save, keybindings,
+  and your whole workspace (open folder, tabs, split state) persist across
+  restarts.
+- 🌈 **3 accent themes** — Neon Pink/Cyan, Cyber-Purple, Toxic-Green — live
+  switchable, affects both the UI chrome and the editor's syntax colors.
+- 🚀 **Self-updating** — checks GitHub Releases on launch and installs
+  updates via `electron-updater`.
+- ⌨️ **A real VS-Code-style menu bar** — File/Edit/Selection/View/Go/
+  Terminal/Help, with working Undo/Redo, multi-cursor, comment toggling,
+  go-to-line, and more.
 
-## Installation
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
 
-```bash
-pnpm install
-```
+<img alt="Tech Stack" src=".github/assets/banner_techstack.png" height="56"/>
 
-Der `postinstall`-Hook ruft `electron-rebuild` auf und baut `node-pty` damit
-automatisch gegen die Electron-ABI neu – dafür ist Internetzugriff beim ersten
-Install nötig. Falls das fehlschlägt, startet nxCode trotzdem: das Terminal-Panel
-meldet dann nur "nicht verfügbar", der Rest der App funktioniert normal.
+<div align="center">
 
-Falls der Rebuild-Schritt manuell nachgeholt werden muss (z. B. nach einem
-Node- oder Electron-Update), einfach erneut ausführen:
+![Electron](https://img.shields.io/badge/Electron-2B2E3A?style=flat-square&logo=electron&logoColor=9FEAF9)
+![React](https://img.shields.io/badge/React-2B2E3A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-2B2E3A?style=flat-square&logo=typescript&logoColor=3178C6)
+![Vite](https://img.shields.io/badge/Vite-2B2E3A?style=flat-square&logo=vite&logoColor=BD93F9)
+![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-2B2E3A?style=flat-square&logo=visualstudiocode&logoColor=00E5FF)
+![Zustand](https://img.shields.io/badge/Zustand-2B2E3A?style=flat-square&logoColor=FF2D95)
+![Prettier](https://img.shields.io/badge/Prettier-2B2E3A?style=flat-square&logo=prettier&logoColor=F7B93E)
 
-```bash
-pnpm run rebuild
-```
+</div>
 
-## Entwicklung
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
 
-```bash
-pnpm dev
-```
+<img alt="Media" src=".github/assets/banner_media.png" height="56"/><br/>
 
-Startet Vite-Dev-Server + Electron gemeinsam mit Hot Reload für den Renderer.
+<img alt="Split view" src=".github/assets/screenshot_splitview.png" width="720"/><br/>
+Split-view editing with live-synced Monaco models<br/><br/>
+<img alt="Menu bar and explorer" src=".github/assets/screenshot_menu.png" width="720"/><br/>
+The full VS-Code-style menu bar, explorer, and bracket-pair colorization in action
 
-## Windows-.exe bauen
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
 
-```bash
-pnpm dist:win
-```
+<img alt="FAQ" src=".github/assets/banner_faq.png" height="56"/>
 
-Erzeugt in `release/` sowohl einen NSIS-Installer als auch eine portable `.exe`.
-Das App-Icon liegt unter `build/icon.ico` (kann jederzeit gegen ein eigenes
-ausgetauscht werden – 256×256, mehrere Auflösungen eingebettet).
+### Is this a VS Code extension?
 
-## Projektstruktur
+No — nxCode is a **standalone Electron app**, not a VS Code extension. It just
+uses the same Monaco editor core under the hood.
 
-```
-nxCode/
-├─ electron/           # Main-Prozess (Fenster, IPC, Dateisystem, PTY)
-│  ├─ main.ts
-│  ├─ preload.ts
-│  └─ shared/types.ts  # gemeinsamer IPC-Contract
-├─ src/                # React-Renderer
-│  ├─ components/
-│  │  ├─ Editor/       # Monaco-Wrapper, nxNeon-Theme, React-Typen, Lua/FiveM-Support,
-│  │  │                # Tag-Editing, Format-on-Save, Syntax-Checks
-│  │  │  ├─ formatters/   # Prettier-Anbindung + eigener Lua-Formatter
-│  │  │  └─ checkers/     # Lua-Block-Checker + generischer Klammer-Checker
-│  │  ├─ Sidebar/      # Datei-Explorer (inkl. Drag&Drop zum Verschieben)
-│  │  ├─ Terminal/     # xterm.js Panel (cmd.exe)
-│  │  ├─ BottomPanel.tsx    # Terminal/Probleme-Tabs
-│  │  └─ ProblemsPanel.tsx  # Fehler/Warnungen-Liste
-│  ├─ data/
-│  │  ├─ lua/          # GTA5-Natives-DB + kuratierte CFX/ESX-Funktionen
-│  │  └─ react-types/  # echte @types/react .d.ts Dateien für JSX-IntelliSense
-│  ├─ hooks/           # Keybindings, Diagnostics-Hook
-│  ├─ store/           # zustand State (Tabs, offene Dateien, UI-Zustand)
-│  └─ styles/          # Design-Tokens + Komponenten-CSS
-└─ package.json
-```
+### Does the FiveM/React autocomplete understand my own project?
 
-## Nächste sinnvolle Ausbaustufen
+Not fully. It's static autocomplete over known APIs (GTA5 natives, CFX/ESX,
+React), not a project-aware language server — see the callout above.
 
-- Mehrere Editor-Splits (Side-by-Side)
-- Git-Integration (Status-Icons im Explorer, Diff-View)
-- Einstellungen-Panel (Theme-Varianten, Tastenkürzel anpassen)
-- Extension-artige Snippet-Verwaltung
+### Does it work on macOS/Linux?
+
+The renderer/editor itself is plain Electron and should run anywhere, but the
+integrated terminal (`node-pty`), the installer, and the auto-updater are all
+Windows-focused and untested elsewhere.
+
+### Why Lua and not [my framework]?
+
+nxCode's Lua tooling is built specifically around **FiveM + ESX Legacy**,
+since that's what it was built for. Other Lua frameworks will still get
+syntax highlighting and the generic bracket checker, just not the
+autocomplete/hover database.
+
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+
+<img alt="Building" src=".github/assets/banner_building.png" height="56"/>
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/neroxservice/nxcode.git
+   ```
+2. `cd` into the project directory:
+   ```bash
+   cd nxcode
+   ```
+3. Install dependencies (also rebuilds `node-pty` against Electron's ABI):
+   ```bash
+   pnpm install
+   ```
+4. Run in development mode (Vite + Electron with hot reload):
+   ```bash
+   pnpm dev
+   ```
+5. Build the Windows installer:
+   ```bash
+   pnpm dist:win
+   ```
+
+The installer (NSIS) and a portable `.exe` are output to `release/`.
+
+> If `node-pty` fails to rebuild on Windows with an `MSB8040` error, install
+> the **Spectre-mitigated libraries** for your MSVC toolset via the Visual
+> Studio Installer (Individual Components → search "Spectre"), then run
+> `pnpm run rebuild`.
+
+<img alt="separator" src=".github/assets/separator.png" width="100%"/>
+
+<img alt="License" src=".github/assets/banner_license.png" height="56"/>
+
+This project is licensed under the MIT license. See [LICENSE](LICENSE) for
+more details.
+
+<div align="center">
+
+Made with ❤️ by **nxService & Streams**
+
+</div>
