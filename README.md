@@ -94,9 +94,9 @@ installer — all in one lightweight Electron app.
 
 <img alt="Media" src="assets/banner_media.png" height="56"/><br/>
 
-<img alt="Split view" src="assets/screenshot_splitview.png" width="720"/><br/>
+<img alt="Split view" src="https://i.ibb.co/PG0tT7Wj/Screenshot-1.png" width="720"/><br/>
 Split-view editing with live-synced Monaco models<br/><br/>
-<img alt="Menu bar and explorer" src="assets/screenshot_menu.png" width="720"/><br/>
+<img alt="Menu bar and explorer" src="https://i.ibb.co/tTnwV2YL/Screenshot-2.png" width="720"/><br/>
 The full VS-Code-style menu bar, explorer, and bracket-pair colorization in action
 
 <img alt="separator" src="assets/separator.png" width="100%"/>
